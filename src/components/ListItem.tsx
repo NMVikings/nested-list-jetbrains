@@ -12,7 +12,9 @@ export const ListItem = ({ item: { children, label }, depth }: Props) => {
   return (
     <li>
       <span>{label}</span>
-      {children.length && <NestedList children={children} depth={depth + 1} />}
+      {children.length ? (
+        <NestedList children={children} depth={depth + 1} />
+      ) : null}
     </li>
   );
 };
