@@ -1,7 +1,11 @@
 import React from "react";
 
+import { NestedList } from "./components/NestedList";
+import { createItems } from "./utils";
+
 function App() {
-  return <div>Nested List</div>;
+  const items = createItems(10);
+  return <NestedList children={items} />;
 }
 
 export default App;
