@@ -1,5 +1,6 @@
 import React from "react";
 
+import { MAX_DEPTH } from "../constants";
 import { Tree } from "../types";
 import { ListItem } from "./ListItem";
 
@@ -7,8 +8,6 @@ type Props = {
   children: Tree;
   depth?: number;
 };
-
-const MAX_DEPTH = 2;
 
 export const NestedList = ({ children, depth = 0 }: Props) => {
   if (depth > MAX_DEPTH) {
