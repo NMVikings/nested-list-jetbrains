@@ -1,4 +1,5 @@
 import React from "react";
+import { START_DEPTH } from "../constants";
 
 import { ItemRenderer, Tree } from "../types";
 import { DefaultItem } from "./DefaultItem";
@@ -13,7 +14,7 @@ type Props = {
 export const NestedList = ({
   children,
   Item = DefaultItem,
-  depth = 0,
+  depth = START_DEPTH,
 }: Props) => {
   return (
     <ul>

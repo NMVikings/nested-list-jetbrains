@@ -1,9 +1,10 @@
+import { START_DEPTH } from "./constants";
 import { Tree } from "./types";
 
 export const createItems = (
   amount: number,
-  depth = 0,
-  currentDepth = 0
+  depth: number,
+  currentDepth = START_DEPTH
 ): Tree => {
   let items = [];
   const children =
