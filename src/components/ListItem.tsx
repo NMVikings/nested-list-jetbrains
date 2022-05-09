@@ -1,11 +1,12 @@
 import React, { useState, useCallback } from "react";
 import { MAX_DEPTH } from "../constants";
 
-import { Item } from "../types";
+import { Item, ItemRenderer } from "../types";
 import { NestedList } from "./NestedList";
 
 type Props = {
   item: Item;
+  Item: ItemRenderer;
   depth: number;
 };
 
@@ -21,18 +22,22 @@ const useToggle = (defaultValue: boolean): [boolean, () => void] => {
 
 const noop = () => {};
 
-export const ListItem = ({ item: { children, label }, depth }: Props) => {
+export const ListItem = ({ item, depth, Item }: Props) => {
   const [isOpen, toggle] = useToggle(false);
 
-  const canNestedListBeShown = children.length !== 0 && depth < MAX_DEPTH;
+  const canNestedListBeShown = item.children.length !== 0 && depth < MAX_DEPTH;
   const isNestedListVisible = canNestedListBeShown && isOpen;
 
   return (
-    <li>
-      <span onClick={canNestedListBeShown ? toggle : noop}>{label}</span>
+    <Item
+      item={item}
+      isOpen={isOpen}
+      toggle={canNestedListBeShown ? toggle : noop}
+      depth={depth}
+    >
       {isNestedListVisible && (
-        <NestedList children={children} depth={depth + 1} />
+        <NestedList children={item.children} depth={depth + 1} Item={Item} />
       )}
-    </li>
+    </Item>
   );
 };
