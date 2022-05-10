@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import { MAX_DEPTH } from "../../constants";
 
-import { Node } from "../../types";
+import { Node } from "./types";
 import { NestedList } from "./NestedList";
 import { useItem } from "./context";
 

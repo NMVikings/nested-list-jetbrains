@@ -1,14 +1,15 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 
-import { TreeViewer } from "../TreeViewer";
-import { createItems } from "../../../utils";
-import { ItemRenderer } from "../../../types";
+import TreeViewer from "..";
+import type { NodeRenderer } from "..";
+
+import { createTree } from "../createTree";
 
 test("renders only top level by default", () => {
   const amount = 5;
   const depth = 10;
-  const items = createItems(amount, depth);
+  const items = createTree(amount, depth);
   render(<TreeViewer children={items} />);
 
   for (let currentDepth = 1; currentDepth <= depth; currentDepth++) {
@@ -22,7 +23,7 @@ test("renders only top level by default", () => {
 test("new levels are opened by click and renders only 3 levels in depth", () => {
   const amount = 5;
   const depth = 10;
-  const items = createItems(amount, depth);
+  const items = createTree(amount, depth);
   render(<TreeViewer children={items} />);
 
   const topLevelElement = screen.queryByText(/Item 2 1/)!;
@@ -48,9 +49,9 @@ test("new levels are opened by click and renders only 3 levels in depth", () => 
 test("renders with custom item renderer", () => {
   const amount = 10;
   const depth = 2;
-  const items = createItems(amount, depth);
+  const items = createTree(amount, depth);
 
-  const CustomItem: ItemRenderer = ({ node, depth, children, toggle }) => {
+  const CustomItem: NodeRenderer = ({ node, depth, children, toggle }) => {
     return (
       <li>
         <span onClick={toggle}>
@@ -61,7 +62,7 @@ test("renders with custom item renderer", () => {
     );
   };
 
-  render(<TreeViewer children={items} Item={CustomItem} />);
+  render(<TreeViewer children={items} NodeRenderer={CustomItem} />);
 
   const elements = screen.queryAllByText(/Custom Item \d 1 2/);
   expect(elements.length).toBe(amount);

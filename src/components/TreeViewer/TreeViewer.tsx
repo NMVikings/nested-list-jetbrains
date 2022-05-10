@@ -1,24 +1,24 @@
 import React from "react";
 import { START_DEPTH } from "../../constants";
 
-import { ItemRenderer, Tree } from "../../types";
-import { DefaultItem } from "../DefaultItem";
+import { NodeRenderer, Tree } from "./types";
+import { DefaultNodeRenderer } from "../DefaultNodeRenderer";
 import { NestedList } from "./NestedList";
 import { TreeViewerContextProvider } from "./context";
 
 type Props = {
-  Item?: ItemRenderer;
+  NodeRenderer?: NodeRenderer;
   depth?: number;
   children: Tree;
 };
 
 export const TreeViewer = ({
   children,
-  Item = DefaultItem,
+  NodeRenderer = DefaultNodeRenderer,
   depth = START_DEPTH,
 }: Props) => {
   return (
-    <TreeViewerContextProvider value={{ Item }}>
+    <TreeViewerContextProvider value={{ NodeRenderer }}>
       <NestedList children={children} depth={depth} />
     </TreeViewerContextProvider>
   );

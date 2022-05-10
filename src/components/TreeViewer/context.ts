@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
-import { DefaultItem } from "../DefaultItem";
+import { DefaultNodeRenderer } from "../DefaultNodeRenderer";
 
-const TreeViewerContext = React.createContext({ Item: DefaultItem });
+const TreeViewerContext = React.createContext({
+  NodeRenderer: DefaultNodeRenderer,
+});
 
-export const useItem = () => useContext(TreeViewerContext).Item;
+export const useItem = () => useContext(TreeViewerContext).NodeRenderer;
 
 export const TreeViewerContextProvider = TreeViewerContext.Provider;

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Tree } from "../../types";
+import { Tree } from "./types";
 import { ListItem } from "./ListItem";
 
 export type NestedListProps = {

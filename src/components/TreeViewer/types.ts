@@ -8,7 +8,7 @@ export type Node = {
 
 export type Tree = Node[];
 
-type ItemRendererProps = {
+type NodeRendererProps = {
   node: Node;
   toggle: () => void;
   isOpen: boolean;
@@ -16,4 +16,4 @@ type ItemRendererProps = {
   children: ReactNode;
 };
 
-export type ItemRenderer = (props: ItemRendererProps) => JSX.Element;
+export type NodeRenderer = (props: NodeRendererProps) => JSX.Element;
