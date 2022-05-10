@@ -3,7 +3,7 @@ import { START_DEPTH } from "../../constants";
 
 import { NodeRenderer, Tree } from "./types";
 import { DefaultNodeRenderer } from "../DefaultNodeRenderer";
-import { NestedList } from "./NestedList";
+import { List } from "./List";
 import { TreeViewerContextProvider } from "./context";
 
 type Props = {
@@ -19,7 +19,7 @@ export const TreeViewer = ({
 }: Props) => {
   return (
     <TreeViewerContextProvider value={{ NodeRenderer }}>
-      <NestedList children={children} depth={depth} />
+      <List nodes={children} depth={depth} />
     </TreeViewerContextProvider>
   );
 };

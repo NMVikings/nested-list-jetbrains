@@ -2,7 +2,7 @@ import React, { useState, useCallback } from "react";
 import { MAX_DEPTH } from "../../constants";
 
 import { Node } from "./types";
-import { NestedList } from "./NestedList";
+import { List } from "./List";
 import { useItem } from "./context";
 
 type Props = {
@@ -36,9 +36,7 @@ export const ListItem = ({ node, depth }: Props) => {
       toggle={canNestedListBeShown ? toggle : noop}
       depth={depth}
     >
-      {isNestedListVisible && (
-        <NestedList children={node.children} depth={depth + 1} />
-      )}
+      {isNestedListVisible && <List nodes={node.children} depth={depth + 1} />}
     </Item>
   );
 };
