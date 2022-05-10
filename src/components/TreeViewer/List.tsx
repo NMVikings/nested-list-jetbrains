@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Tree } from "./types";
-import { ListItem } from "./ListItem";
+import { useNodeRenderer } from "./context";
 
 type Props = {
   nodes: Tree;
@@ -9,10 +9,12 @@ type Props = {
 };
 
 export const List = ({ nodes, depth }: Props) => {
+  const NodeRenderer = useNodeRenderer()!;
+
   return (
     <ul>
       {nodes.map((node) => (
-        <ListItem key={node.id} node={node} depth={depth} />
+        <NodeRenderer key={node.id} node={node} depth={depth} />
       ))}
     </ul>
   );

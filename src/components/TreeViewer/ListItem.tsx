@@ -1,42 +1,5 @@
-import React, { useState, useCallback } from "react";
-import { MAX_DEPTH } from "../../constants";
+import React from "react";
 
-import { Node } from "./types";
-import { List } from "./List";
-import { useItem } from "./context";
-
-type Props = {
-  node: Node;
-  depth: number;
-};
-
-const useToggle = (defaultValue: boolean): [boolean, () => void] => {
-  const [bool, setBool] = useState(defaultValue);
-
-  const toggle = useCallback(() => {
-    setBool((prevBool) => !prevBool);
-  }, []);
-
-  return [bool, toggle];
-};
-
-const noop = () => {};
-
-export const ListItem = ({ node, depth }: Props) => {
-  const Item = useItem();
-  const [isOpen, toggle] = useToggle(false);
-
-  const canNestedListBeShown = node.children.length !== 0 && depth < MAX_DEPTH;
-  const isNestedListVisible = canNestedListBeShown && isOpen;
-
-  return (
-    <Item
-      node={node}
-      isOpen={isOpen}
-      toggle={canNestedListBeShown ? toggle : noop}
-      depth={depth}
-    >
-      {isNestedListVisible && <List nodes={node.children} depth={depth + 1} />}
-    </Item>
-  );
+export const ListItem = (props: React.ComponentProps<"li">) => {
+  return <li {...props} />;
 };
