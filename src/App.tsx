@@ -1,11 +1,11 @@
 import React from "react";
 
-import { NestedList } from "./components/NestedList";
+import { TreeViewer } from "./components/TreeViewer/TreeViewer";
 import { createItems } from "./utils";
 
 function App() {
   const items = createItems(2, 3);
-  return <NestedList children={items} />;
+  return <TreeViewer children={items} />;
 }
 
 export default App;

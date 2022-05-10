@@ -1,15 +1,15 @@
 import { ReactNode } from "react";
 
-export type Item = {
+export type Node = {
   id: string;
   label: string;
-  children: Item[];
+  children: Node[];
 };
 
-export type Tree = Item[];
+export type Tree = Node[];
 
 type ItemRendererProps = {
-  item: Item;
+  node: Node;
   toggle: () => void;
   isOpen: boolean;
   depth: number;

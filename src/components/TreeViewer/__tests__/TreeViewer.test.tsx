@@ -1,15 +1,15 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 
-import { NestedList } from "./NestedList";
-import { createItems } from "../utils";
-import { ItemRenderer } from "../types";
+import { TreeViewer } from "../TreeViewer";
+import { createItems } from "../../../utils";
+import { ItemRenderer } from "../../../types";
 
 test("renders only top level by default", () => {
   const amount = 5;
   const depth = 10;
   const items = createItems(amount, depth);
-  render(<NestedList children={items} />);
+  render(<TreeViewer children={items} />);
 
   for (let currentDepth = 1; currentDepth <= depth; currentDepth++) {
     const regex = new RegExp(`Item \\d ${currentDepth}`);
@@ -23,7 +23,7 @@ test("new levels are opened by click and renders only 3 levels in depth", () => 
   const amount = 5;
   const depth = 10;
   const items = createItems(amount, depth);
-  render(<NestedList children={items} />);
+  render(<TreeViewer children={items} />);
 
   const topLevelElement = screen.queryByText(/Item 2 1/)!;
   expect(topLevelElement).toBeInTheDocument();
@@ -50,18 +50,18 @@ test("renders with custom item renderer", () => {
   const depth = 2;
   const items = createItems(amount, depth);
 
-  const CustomItem: ItemRenderer = ({ item, depth, children, toggle }) => {
+  const CustomItem: ItemRenderer = ({ node, depth, children, toggle }) => {
     return (
       <li>
         <span onClick={toggle}>
-          Custom {item.label} {depth * 2}
+          Custom {node.label} {depth * 2}
         </span>
         {children}
       </li>
     );
   };
 
-  render(<NestedList children={items} Item={CustomItem} />);
+  render(<TreeViewer children={items} Item={CustomItem} />);
 
   const elements = screen.queryAllByText(/Custom Item \d 1 2/);
   expect(elements.length).toBe(amount);

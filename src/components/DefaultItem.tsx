@@ -1,13 +1,8 @@
 import { ItemRenderer } from "../types";
 
-export const DefaultItem: ItemRenderer = ({
-  item,
-  toggle,
-  depth,
-  children,
-}) => (
+export const DefaultItem: ItemRenderer = ({ node, toggle, children }) => (
   <li>
-    <span onClick={toggle}>{item.label}</span>
+    <span onClick={toggle}>{node.label}</span>
     {children}
   </li>
 );
