@@ -1,14 +1,10 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 
-import TreeViewer, { ListItem, Expandable } from "..";
+import { TreeViewer, ListItem, Expandable } from "..";
 import type { NodeRenderer } from "..";
 
 import { createTree } from "../createTree";
-
-const getToggleElement = (node: HTMLElement): Element =>
-  // eslint-disable-next-line
-  node.parentNode?.querySelector("i[data-toggle]")!;
 
 test("renders only top level by default", () => {
   const amount = 5;
@@ -20,7 +16,7 @@ test("renders only top level by default", () => {
     const regex = new RegExp(`Item \\d ${currentDepth}`);
     const elements = screen.queryAllByText(regex);
     const expectedAmount = currentDepth > 1 ? 0 : amount;
-    expect(elements.length).toBe(expectedAmount);
+    expect(elements).toHaveLength(expectedAmount);
   }
 });
 
@@ -33,18 +29,21 @@ test("new levels are opened by click and renders only 3 levels in depth", () => 
   const topLevelElement = screen.queryByText(/Item 2 1/)!;
   expect(topLevelElement).toBeInTheDocument();
 
-  fireEvent.click(getToggleElement(topLevelElement));
+  fireEvent.click(topLevelElement);
   const secondLevelElements = screen.queryAllByText(/Item \d 2/);
-  expect(secondLevelElements.length).toBe(amount);
+  expect(secondLevelElements).toHaveLength(amount);
 
-  fireEvent.click(getToggleElement(secondLevelElements[0]));
+  fireEvent.click(secondLevelElements[0]);
   const thirdLevelElements = screen.queryAllByText(/Item \d 3/);
-  expect(thirdLevelElements.length).toBe(amount);
-  expect(getToggleElement(thirdLevelElements[0])).not.toBeInTheDocument();
+  expect(thirdLevelElements).toHaveLength(amount);
 
-  fireEvent.click(getToggleElement(topLevelElement));
-  expect(screen.queryAllByText(/Item \d 2/).length).toBe(0);
-  expect(screen.queryAllByText(/Item \d 3/).length).toBe(0);
+  fireEvent.click(thirdLevelElements[0]);
+  const fourthLevelElements = screen.queryAllByText(/Item \d 4/);
+  expect(fourthLevelElements).toHaveLength(0);
+
+  fireEvent.click(topLevelElement);
+  expect(screen.queryAllByText(/Item \d 2/)).toHaveLength(0);
+  expect(screen.queryAllByText(/Item \d 3/)).toHaveLength(0);
 });
 
 test("renders with custom item renderer", () => {
@@ -67,9 +66,9 @@ test("renders with custom item renderer", () => {
   render(<TreeViewer children={items} NodeRenderer={CustomItem} />);
 
   const elements = screen.queryAllByText(/Custom Item \d 1 2/);
-  expect(elements.length).toBe(amount);
+  expect(elements).toHaveLength(amount);
 
-  fireEvent.click(getToggleElement(elements[0]));
+  fireEvent.click(elements[0]);
   const secondLevelElements = screen.queryAllByText(/Custom Item \d 2 4/);
-  expect(secondLevelElements.length).toBe(amount);
+  expect(secondLevelElements).toHaveLength(amount);
 });

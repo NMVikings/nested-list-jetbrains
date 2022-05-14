@@ -1,0 +1,35 @@
+.itemContent {
+  display: flex;
+  align-items: center;
+  padding: 2px 8px;
+}
+
+.itemContent.expandable {
+  cursor: pointer;
+}
+
+.itemContent.expandable:hover,
+.itemContent.expandable:focus {
+  background: #e3eefa;
+}
+
+.itemContent.expandable .toggleButton {
+  visibility: visible;
+}
+
+.toggleButton {
+  width: 5px;
+  height: 5px;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+  margin-right: 8px;
+  visibility: hidden;
+}
+
+.toggleButton.collapsed {
+  transform: translateY(-2px) rotate(45deg);
+}
+
+.toggleButton.expanded {
+  transform: translateY(2px) rotate(-135deg);
+}

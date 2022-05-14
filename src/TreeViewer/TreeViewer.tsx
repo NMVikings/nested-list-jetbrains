@@ -1,9 +1,9 @@
 import React from "react";
-import { MAX_DEPTH } from "../../constants";
+import { MAX_DEPTH } from "./constants";
 
 import { NodeRenderer, Tree } from "./types";
-import { DefaultNodeRenderer } from "./DefaultNodeRenderer";
-import { List } from "./List";
+import { DefaultNodeRenderer } from "./components/DefaultNodeRenderer";
+import { List } from "./components/List";
 import { TreeViewerContextProvider } from "./context";
 
 type Props = {

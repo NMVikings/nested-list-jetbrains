@@ -1,6 +1,6 @@
 import { Expandable } from "./Expandable";
 import { ListItem } from "./ListItem";
-import type { NodeRenderer } from "./types";
+import type { NodeRenderer } from "../types";
 
 export const DefaultNodeRenderer: NodeRenderer = ({ node, depth }) => (
   <ListItem>

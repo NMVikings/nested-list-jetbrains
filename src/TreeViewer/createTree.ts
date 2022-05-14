@@ -1,4 +1,4 @@
-import { START_DEPTH } from "../../constants";
+import { START_DEPTH } from "./constants";
 import type { Tree } from ".";
 
 export const createTree = (
