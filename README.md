@@ -1,5 +1,8 @@
 # Nested List
 
+Результат можно посмотреть – http://nested-list-jetbrains.vercel.app/
+Почитать почему так, а не иначе – [DOCUMENTATION.md](DOCUMENTATION.md)
+
 ## Available Scripts
 
 In the project directory, you can run:
