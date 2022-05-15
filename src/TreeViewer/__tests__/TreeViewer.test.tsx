@@ -5,6 +5,7 @@ import { TreeViewer, ListItem, Expandable } from "..";
 import type { NodeRenderer } from "..";
 
 import { createTree } from "../createTree";
+import { START_DEPTH } from "../constants";
 
 test("renders only top level by default", () => {
   const amount = 5;
@@ -12,7 +13,7 @@ test("renders only top level by default", () => {
   const items = createTree(amount, depth);
   render(<TreeViewer children={items} />);
 
-  for (let currentDepth = 1; currentDepth <= depth; currentDepth++) {
+  for (let currentDepth = START_DEPTH; currentDepth <= depth; currentDepth++) {
     const regex = new RegExp(`Item \\d ${currentDepth}`);
     const elements = screen.queryAllByText(regex);
     const expectedAmount = currentDepth > 1 ? 0 : amount;

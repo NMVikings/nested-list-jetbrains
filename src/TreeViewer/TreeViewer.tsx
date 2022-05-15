@@ -1,5 +1,5 @@
 import React from "react";
-import { MAX_DEPTH } from "./constants";
+import { MAX_DEPTH, START_DEPTH } from "./constants";
 
 import { NodeRenderer, Tree } from "./types";
 import { DefaultNodeRenderer } from "./components/DefaultNodeRenderer";
@@ -19,7 +19,7 @@ export const TreeViewer = ({
 }: Props) => {
   return (
     <TreeViewerContextProvider value={{ NodeRenderer, maxDepth }}>
-      <List nodes={children} depth={1} />
+      <List nodes={children} depth={START_DEPTH} />
     </TreeViewerContextProvider>
   );
 };
