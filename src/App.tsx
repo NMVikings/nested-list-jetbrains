@@ -4,7 +4,7 @@ import { TreeViewer } from "./TreeViewer";
 import { createTree } from "./TreeViewer/createTree";
 
 function App() {
-  const tree = createTree(5, 10);
+  const tree = createTree(50, 3);
   return <TreeViewer children={tree} />;
 }
 

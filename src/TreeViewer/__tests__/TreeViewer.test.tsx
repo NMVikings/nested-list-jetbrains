@@ -8,7 +8,7 @@ import { createTree } from "../createTree";
 
 test("renders only top level by default", () => {
   const amount = 5;
-  const depth = 10;
+  const depth = 3;
   const items = createTree(amount, depth);
   render(<TreeViewer children={items} />);
 
@@ -22,7 +22,7 @@ test("renders only top level by default", () => {
 
 test("new levels are opened by click and renders only 3 levels in depth", () => {
   const amount = 5;
-  const depth = 10;
+  const depth = 3;
   const items = createTree(amount, depth);
   render(<TreeViewer children={items} />);
 
